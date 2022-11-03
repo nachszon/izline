@@ -1,0 +1,85 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(int argc, char *argv[])
+{
+
+
+    //na prd pierwszy argument programu
+    FILE *pointer_to_file;
+    char tab_file_name[40]="plik.txt";
+    char tab_string_pattern[100];
+    char tab_string_from_user[100];
+    int start_line_from_file;
+    int after_line_from_user;
+    int line_after;
+
+
+
+
+    /*sets values*/
+    start_line_from_file=1;
+    sprintf (tab_string_from_user,"pierwsza linia");
+    after_line_from_user=2;
+    line_after=0;
+
+
+
+
+
+
+
+    //Obsługa błędu, jeżeli plik nie istnieje lub nie można go otworzyć
+    if (pointer_to_file=fopen(tab_file_name,"r")==NULL){
+
+        printf ("Nie moge otworzyc pliku %s", tab_file_name);
+
+        return 0;
+
+        }else{
+
+        pointer_to_file=fopen(tab_file_name,"r");
+
+        }
+        //koniec obsługi błędu
+        //jeżeli bład nie istnieje, otwórz plik do odczytu
+
+
+
+
+        while ((fgets (tab_string_pattern,100,pointer_to_file))!=NULL){
+
+
+            start_line_from_file++;
+
+            if (strstr(tab_string_pattern,tab_string_from_user)){
+
+                    fputs (tab_string_pattern,stdout);
+                    break;
+
+
+            }
+
+
+            }
+
+            line_after=start_line_from_file+after_line_from_user;
+
+
+
+            while (start_line_from_file < line_after){
+
+                fgets (tab_string_pattern,100,pointer_to_file);
+                fputs(tab_string_pattern,stdout);
+                start_line_from_file++;
+
+
+
+
+
+        }
+
+
+}
+
+
