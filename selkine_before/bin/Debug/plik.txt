@@ -1,0 +1,10 @@
+pierwsza linia
+druga linia
+to jest trzecia linia a to jest dalszy ciag trzeciej linii
+czwarta linia
+piata linia
+szosta linia
+siodma linia
+osma linia
+dziewiata linia
+dziesiata linia
