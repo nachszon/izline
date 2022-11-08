@@ -1,0 +1,67 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include<string.h>
+
+int function_before(char tab_file_name_dev[],char tab_pattern_f_user_dev[],int numb_before_line_f_user_dev){
+
+    FILE *pointer_to_file;
+    char tab_string_dev[100];
+    int numb_line_dev=0;
+    int numb_before_start_dev=0;
+    int numb_before_end_dev=0;
+
+
+    if ((pointer_to_file=fopen(tab_file_name_dev,"r"))==NULL){
+
+        printf ("Nie moge otworzyc pliku %s", tab_file_name_dev);
+
+        return 0;
+    }
+
+     while ((fgets (tab_string_dev,100,pointer_to_file))!=NULL){
+
+        numb_line_dev++;
+        if (strstr(tab_string_dev,tab_pattern_f_user_dev)){
+
+            break;
+        }
+    }
+
+    //wyliczamy pierwsza linie przed
+    numb_before_start_dev=numb_line_dev-numb_before_line_f_user_dev;
+    numb_before_end_dev=numb_line_dev;
+
+    numb_line_dev=0;
+    rewind(pointer_to_file);
+
+    while ((fgets (tab_string_dev,100,pointer_to_file))!=NULL){
+
+        numb_line_dev++;
+        if (numb_line_dev>=numb_before_start_dev && numb_line_dev<=numb_before_end_dev){
+
+            fputs(tab_string_dev,stdout);
+
+        }
+
+    }
+
+
+}
+
+int main(int argc, char *argv[])
+{
+
+    char tab_file_name[32];
+    sprintf (tab_file_name,argv[1]);
+
+    char tab_pattern_f_user[100];
+    sprintf (tab_pattern_f_user,argv[2]);
+
+    int numb_before_line_f_user;
+    numb_before_line_f_user=atoi(argv[3]);
+
+
+    function_before(tab_file_name,tab_pattern_f_user,numb_before_line_f_user);
+
+    return 0;
+}
